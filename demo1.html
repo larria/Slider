@@ -1,0 +1,59 @@
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<title>slider test</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<style>
+html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img { margin:0; padding:0; }
+fieldset, img { border:none; }
+address, caption, cite, code, dfn, th, var { font-style:normal; font-weight:normal; }
+ul, ol { list-style:none; }
+input { padding-top:0; padding-bottom:0; }
+select, input { vertical-align:middle; }
+select, input, textarea { font-size:12px; margin:0; }
+table { border-collapse:collapse; }
+body { background:#fff; color:#000; font:12px/20px "宋体"; -webkit-text-size-adjust:none;}
+iframe { border:none;}
+.clearfix:after { content:"."; display:block; height:0; visibility:hidden; clear:both; }
+.clearfix { zoom:1; }
+.clearit { clear:both; height:0; font-size:0; overflow:hidden; }
+a { color:#000; text-decoration:none; }
+a:visited { color:#800080; }
+a:hover{ color: #B58D4F;}
+a:hover, a:active, a:focus { text-decoration:none; }
+
+.slider{ position: relative; width: 1000px; height: 600px; overflow: hidden; }
+.slider_item{ float: left; width: 1000px; height: 600px; -webkit-transform:translate3d(0,0,0);/*for ipad*/}
+.slider_item img{ width: 1000px; height: 600px;}
+</style>
+</head>
+<body>
+    <div class="slider" id="slider">
+        <div class="slider_item">
+            <img src="http://galleria.io/static/i/s2013/1m.jpg" alt="" title="" />
+        </div>
+        <div class="slider_item">
+            <img src="http://galleria.io/static/i/s2013/2m.jpg" alt="" title="" />
+        </div>
+        <div class="slider_item">
+            <img src="http://galleria.io/static/i/s2013/3m.jpg" alt="" title="" />
+        </div>
+        <div class="slider_item">
+            <img src="http://galleria.io/static/i/s2013/4m.jpg" alt="" title="" />
+        </div>
+        <div class="slider_item">
+            <img src="http://galleria.io/static/i/s2013/5m.jpg" alt="" title="" />
+        </div>
+        <div class="slider_item">
+            <img src="http://galleria.io/static/i/s2013/6m.jpg" alt="" title="" />
+        </div>
+    </div>
+<script src="src/slider.js"></script>
+<script>
+new Slider({
+    wrap : 'slider'
+});
+</script>
+</body>
+</html>

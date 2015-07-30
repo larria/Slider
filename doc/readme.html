@@ -1,0 +1,143 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><link href='http://news.sina.com.cn/268/2014/1203/markfx.css' rel='stylesheet' type='text/css'><title>readme</title></head><body><article class="markdown-body"><h1 id="sliderjs-"><a name="user-content-sliderjs-" href="#sliderjs-" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>Slider.js - 滑动轮播控件</h1>
+<h3 id="_1"><a name="user-content-_1" href="#_1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>特性</h3>
+<ul>
+<li>
+<p>可配置横竖两种方向，是否循环，以及起始元素和位置，可调节动画快慢及自动播放</p>
+</li>
+<li>
+<p>支持触屏交互, 采用 “跟手” 形式</p>
+</li>
+<li>
+<p>公开部分状态读取和控件公有方法，支持onReady等自定义回调</p>
+</li>
+</ul>
+<h3 id="_2"><a name="user-content-_2" href="#_2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>资源引用</h3>
+<pre><code class="html">&lt;script src=&quot;src/Slider-min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<h3 id="_3"><a name="user-content-_3" href="#_3" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>初始化参数</h3>
+<ul>
+<li>
+<p><strong>wrap</strong> : 初始化外层容器，也可直接传入dom</p>
+</li>
+<li>
+<p>itemClass : 子元素共用类名，默认值&rsquo;slider_item&rsquo;</p>
+</li>
+<li>
+<p>slideBy : 每次滑动跨越的元素个数，默认值1</p>
+</li>
+<li>
+<p>speed : 滑动动动画速度，默认值6</p>
+</li>
+<li>
+<p>isVertical : 滑动方向（是否为纵向），默认值false</p>
+</li>
+<li>
+<p>isLoop : 是否循环滑动，默认值true</p>
+</li>
+<li>
+<p>autoPlay : 是否自动播放，默认值false</p>
+</li>
+<li>
+<p>autoInterval : 自动播放时间间隔，需先置autoPlay为true；默认值3，即每隔3s自动滑动一次</p>
+</li>
+</ul>
+<p><code>以下为回调部分</code></p>
+<ul>
+<li>
+<p>onReady : 控件渲染完毕，this指向控件本身，下同。</p>
+</li>
+<li>
+<p>onAniStart : 每次滚动动画开始。</p>
+</li>
+<li>
+<p>onAniEnd : 每次滚动动画结束。</p>
+</li>
+<li>
+<p>onIndexChanged : 当前滚动或者（因循环滚动引起的）瞬移导致页码发生变化。</p>
+</li>
+<li>
+<p>onEdge : 已滚动到边缘。</p>
+</li>
+</ul>
+<h3 id="_4"><a name="user-content-_4" href="#_4" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>公有方法</h3>
+<ul>
+<li>
+<p>slideTo(index) : 滚动到指定序号的元素</p>
+</li>
+<li>
+<p>prev() : 滚动到前一个元素；若当前为第一个元素，且不允许循环滚动，该方法不生效</p>
+</li>
+<li>
+<p>next() : 滚动到后一个元素；若当前为第一个元素，且不允许循环滚动，该方法不生效</p>
+</li>
+<li>
+<p>autoSlide(isAuto) : 开启或自动滚动。</p>
+</li>
+<li>
+<p>prev : 滚动到前一个元素；若当前为第一个元素，且不允许循环滚动，该方法不生效</p>
+</li>
+<li>
+<p>prev : 滚动到前一个元素；若当前为第一个元素，且不允许循环滚动，该方法不生效</p>
+</li>
+<li>
+<p>next : 滚动到前一个元素；若当前为第一个元素，且不允许循环滚动，该方法不生效</p>
+</li>
+</ul>
+<hr />
+<h5 id="1"><a name="user-content-1" href="#1" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>示例1：最简调用``</h5>
+<h6 id="demo1"><a href="../demo1.html">demo1</a></h6>
+<pre><code class="javascript">new Slider({
+    wrap : 'slider'
+});
+</code></pre>
+
+<h5 id="2"><a name="user-content-2" href="#2" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>示例2：完整调用并实现常见的轮播图</h5>
+<h6 id="demo2"><a href="../demo2.html">demo2</a></h6>
+<pre><code class="javascript">var slide_01 = new Slider({
+    wrap : 'slider',
+    itemClass : 'slider_item',
+    startOn : 0,
+    slideBy : 1,
+    speed : 3,
+    isVertical : false,
+    isLoop : true,
+    autoPlay : true,
+    autoInterval : 5,
+    onReady : function () {
+        var that = this,
+            total = this.states.total / 2,
+            dots = this._id('hd_slider_dot'),
+            btnPrev = this._id('hd_slider_prev'),
+            btnNext = this._id('hd_slider_next'),
+            dotCls = '',
+            dotsStr = '';
+        // 点阵
+        for(var i = 0; i &lt; total; i ++){
+            dotCls = i == 0 ? 'dot_list dot_list_cur' : 'dot_list';
+            dotsStr += '&lt;span class=&quot;' + dotCls + '&quot; onmouseover=&quot;slide_01.slideTo(' + i + ')&quot;&gt;&lt;/span&gt;';
+        }
+        dots.innerHTML = dotsStr;
+        this.doms.dots = dots.getElementsByTagName('span');
+        // 前进/后退按钮
+        this._addEvent(btnPrev, 'click', function () {
+            that.prev();
+        });
+        this._addEvent(btnNext, 'click', function () {
+            that.next();
+        });
+    },
+    onAniStart : function () {},
+    onAniEnd : function () {},
+    onIndexChanged : function (index) {
+        var that = this,
+            dots = this.doms.dots,
+            total = this.states.total / 2;
+        for(var i = 0; i &lt; total; i ++){
+            dots[i].className = 'dot_list';
+        }
+        dots[index % total].className = 'dot_list dot_list_cur';
+    },
+    onEdge : function (isLeft) {}
+});
+</code></pre></article><link rel="stylesheet" href="http://news.sina.com.cn/268/2014/1210/monokai_sublime.css"><script src="http://news.sina.com.cn/268/2014/1210/highlight.pack.js"></script><script>hljs.initHighlightingOnLoad();</script></body></html>
